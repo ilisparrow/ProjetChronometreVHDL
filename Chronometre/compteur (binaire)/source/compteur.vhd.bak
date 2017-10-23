@@ -1,0 +1,54 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity compteur is
+	port (
+	H, LOADN, CET, RAZN : in std_logic;
+	DATA : in std_logic_vector(3  downto 0);
+	S: out std_logic_vector (3 downto 0) := "0000");	
+end compteur;
+
+architecture arch of compteur is
+
+SIGNAL tmp : std_logic_vector (3 downto 0) := "0000";
+SIGNAL inc : std_logic_vector (3 downto 0) := "0001";
+
+begin
+
+	process (H, RAZN)
+		begin
+		
+		if (RAZN = '0') then
+		tmp <= "0000";
+		end if;
+		
+		-- not rising_edge pour etre sur front montant 
+		if (CET = '1' AND rising_edge(H)) then
+		
+		S <= std_logic_vector (unsigned(tmp)+unsigned("0001"));
+		
+		-- Le compteur est une machine à état donc on utilise le "case"
+		-- On ne peut pas utiliser des instruction séquentielle dans un process (when etc.)
+		--S<="111";
+		--	case tmp is
+		--		when "000" => tmp <= "001";
+		--		when "001" => tmp <= "010";
+		--		when "010" => tmp <= "011";
+		--		when "011" => tmp <= "100";
+		--		when "100" => tmp <= "101";
+		--		when "101" => tmp <= "110";
+		--		when "110" => tmp <= "111";
+		--		when "111" => tmp <= "000";
+		--		when others => tmp <= "010";
+		--	end case;
+		
+		end if;
+		
+		if (LOADN = '0') then
+		S <= DATA;
+		tmp <= DATA;
+		end if;
+		
+	end process;
+end arch;
