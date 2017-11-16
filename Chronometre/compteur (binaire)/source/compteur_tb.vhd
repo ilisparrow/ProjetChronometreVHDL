@@ -35,23 +35,13 @@ begin
   process
 	begin
 		--Valeurs initiales
-		CET <= '0';
+		CET <= '1';
 		RAZN <= '1';
 		LOADN <= '1';
-		DATA <="0111";
+		DATA <= "0111";
 		
 		--Changements de valeurs pour tests
-		wait for 10 NS;
-		wait for 25 NS;
-		RAZN <= '1';
-		wait for 25 NS;
-		CET <= '1';
-		
-		wait for 550 NS;
-		LOADN <= '0';		
-		wait for 25 NS;
-		LOADN <= '1';
-		wait for 150 NS;
+		wait for 500 NS;
 		StopClock <= TRUE;
 		wait;
 	end process;

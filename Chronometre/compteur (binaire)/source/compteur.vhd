@@ -6,12 +6,14 @@ entity compteur is
 	port (
 	H, LOADN, CET, RAZN: in std_logic;
 	DATA : in std_logic_vector(3  downto 0);
-	S: out std_logic_vector (3 downto 0) := "0000");	
+	S: out std_logic_vector (3 downto 0) := "0000";
+	RETENUE : out std_logic:='0');	
 end compteur;
 
 architecture arch of compteur is
 
-SIGNAL tmp : std_logic_vector (3 downto 0) := "0001";
+SIGNAL tmp : std_logic_vector (3 downto 0) := "0000";
+SIGNAL retenueEnCours: BOOLEAN :=FALSE;
 
 begin
 
@@ -22,20 +24,29 @@ begin
 			tmp <= "0000";
 		end if;
 		
-		if (tmp = "1010") then
-			tmp <= "0000";
-		end if;
- 
-		if (CET = '1' AND rising_edge(H)) then
+		if rising_edge(H) then 
 		
-			tmp <= std_logic_vector (unsigned(tmp)+ 1);
-			S<=tmp;
+			if (LOADN = '0') then
+				S <= DATA;
+				tmp <= DATA;
+			end if;
+			
+			if retenueEnCours then
+				RETENUE<='0';
+				retenueEnCours<=FALSE;
+			end if;
 		
-		end if;
-
-		if (LOADN = '0') then
-			S <= DATA;
-			tmp <= DATA;
+			if (tmp = "1001") then
+				tmp <= "0000";
+				RETENUE <= '1';
+				retenueEnCours <= TRUE;
+			end if;
+			
+			if (CET = '1') then
+				tmp <= std_logic_vector (unsigned(tmp)+ 1);
+				S<=tmp;
+			end if;
+			
 		end if;
 		
 	end process;

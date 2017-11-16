@@ -60,7 +60,7 @@ begin
 			CHRONO_LOADN <= '1';
 			ADATA <="0111";
 
-			wait for 20000 NS;
+			wait for 10000 NS;
 			stopclock <= TRUE;
 		wait;
 	end process;

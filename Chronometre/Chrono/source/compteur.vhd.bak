@@ -27,29 +27,33 @@ begin
 			tmp <= "0000";
 		end if;
 		
+		
 		--Lorsque tmp = 9 on réinitialise, on rajoute la retenue
 		if (tmp = "1010") then
 		
 			tmp <= "0000";
-			retenueEnCours<=TRUE;
-			RETENUE<='1';
 			
-			if(retenueEnCours=TRUE)then 
-			retenueEnCours<=False;
-			end if;
+			if(securite=FALSE)then
+				securite<=TRUE;
+				retenueEnCours<=TRUE;
+				RETENUE<='1';
+			end if:
 			
+		else 
+			securite<=TRUE;
 		end if;
  
 		-- Incrémentation, et reinitialisation des variables de retenue
-		if (CET = '1' AND rising_edge(H)) then
-		
-			--if(not retenueEnCours) then
+		if (CET = '1') then
+			if(tmp<"1010") then
 				tmp <= std_logic_vector (unsigned(tmp)+ 1);
 				S<=tmp;
-				RETENUE<='0';
-				--retenueEnCours<=FALSE;
-			--end if;
+			end if;
 			
+			if (retenueEnCours)then
+				RETENUE<='0';
+				retenueEnCours<=FALSE;
+			end if;
 		
 		end if;
 		

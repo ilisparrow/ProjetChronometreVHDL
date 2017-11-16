@@ -1,0 +1,61 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+--Faire une description structurale du chronomètre
+
+entity chrono is 
+port(
+
+--Declaration des E/S
+--Variables de débuggage
+
+test,testDeux : out std_logic_vector (3 downto 0) := "0000";
+
+--Variables affichage 7 segment
+
+aff_CENTIEMES, aff_DIXIEMES, aff_SEC, aff_DIX_SEC : out std_logic_vector (6 downto 0);
+
+--Variables compteurs
+--CHRONO_LOADN : gestion chargement valeur
+--CHRONO_CET : gestion départ/arret
+--CHRONO_H : Horloge
+
+CHRONO_H, CHRONO_LOADN,CHRONO_RAZN,CHRONO_CET: in std_logic
+
+);
+
+--process avec H de T=10 ms
+end chrono;
+
+architecture arch of chrono is
+--Variables qui gereront les incrementations temporels
+Signal CENTIEMES,DIXIEMES,SEC,DIX_SEC : std_logic_vector (3 downto 0) ;
+--Variables mémoire
+Signal ADATA : std_logic_vector(3  downto 0);
+
+--Variables intérmediaire de retenue
+SIGNAL RETENUE_CENTIEMES_TMP : std_logic:='0';
+
+--Déclaration des composants, afficheur et compteur
+
+component afficheur port (	
+A: in std_logic_vector (3 downto 0);	
+B0, B1, B2, B3, B4, B5, B6 : out std_logic); 
+end component;
+
+component compteur	port (	
+H, LOADN, CET, RAZN: in std_logic;	
+DATA : in std_logic_vector(3  downto 0);	
+S: out std_logic_vector (3 downto 0);
+RETENUE : out std_logic); 
+end component;
+
+begin
+	
+			compteurCENTIEMES : compteur port map (H=>CHRONO_H, RAZN=>CHRONO_RAZN, LOADN=>CHRONO_LOADN, CET=>CHRONO_CET, DATA=>ADATA, RETENUE=>RETENUE_CENTIEMES_TMP, S=>CENTIEMES);
+			
+			compteurDIXIEMES : compteur port map (H=>CHRONO_H, RAZN=>CHRONO_RAZN, LOADN=>CHRONO_LOADN, CET=>RETENUE_CENTIEMES_TMP, DATA=>ADATA, RETENUE=>CHRONO_RETENUE, S=>DIXIEMES);
+			test <= CENTIEMES;
+			testDeux<=DIXIEMES;
+
+end arch;
