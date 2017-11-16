@@ -14,7 +14,7 @@ architecture arch of compteur is
 
 SIGNAL tmp : std_logic_vector (3 downto 0) := "0001";
 SIGNAL retenueEnCours:BOOLEAN :=FALSE;
-SIGNAL securite:BOOLEAN :=FALSE;--Permet de s'assurer qu'on ne fait qu'un passage d'impulssion lors de l'incrementation 9
+SIGNAL AHUIT :BOOLEAN :=FALSE;--Permet de s'assurer qu'on ne fait qu'un passage d'impulssion lors de l'incrementation 9
 
 begin
 	--S <= "1111";
@@ -27,12 +27,17 @@ begin
 			tmp <= "0000";
 		end if;
 		
+		if tmp = "1001" then 
+		AHUIT <= TRUE;
+		end if;
+		
 		--Lorsque tmp = 9 on réinitialise, on rajoute la retenue
-		if (tmp = "1010") then
+		if (tmp = "1010" AND AHUIT) then
 		
 			tmp <= "0000";
-			retenueEnCours<=TRUE;
 			RETENUE<='1';
+			retenueEnCours<=TRUE;
+			AHUIT <= FALSE;
 			
 			if(retenueEnCours=TRUE)then 
 			retenueEnCours<=False;

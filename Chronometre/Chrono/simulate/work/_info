@@ -7,7 +7,7 @@ Eafficheur
 Z0 w1509088798
 Z1 DPx3 std 6 textio 0 22 5>J:;AW>W0[[dW0I6EN1Q0
 Z2 DPx4 ieee 14 std_logic_1164 0 22 5=aWaoGZSMWIcH0i^f`XF1
-Z3 dD:\Desktop\chronomètre\chrono\simulate
+Z3 dD:\Documents\GitHub\ProjetChronometreVHDL\Chronometre\Chrono\simulate
 Z4 8../source/afficheur.vhd
 Z5 F../source/afficheur.vhd
 l0
@@ -15,7 +15,7 @@ L4
 VkCo5AM<W;meWL7BiI5Y2M1
 Z6 OV;C;10.1d;51
 32
-Z7 !s108 1510842341.554000
+Z7 !s108 1510842819.219000
 Z8 !s90 -reportprogress|300|../source/afficheur.vhd|
 Z9 !s107 ../source/afficheur.vhd|
 o-O0
@@ -50,7 +50,7 @@ L6
 VL`MTNA93]8a?^ob9A`^Pl2
 R6
 32
-Z14 !s108 1510842341.818000
+Z14 !s108 1510842819.449000
 Z15 !s90 -reportprogress|300|../source/chrono.vhd|
 Z16 !s107 ../source/chrono.vhd|
 o-O0
@@ -87,7 +87,7 @@ VI?ZDPiH`[0IJZ[8A=T;YQ1
 R6
 32
 !i10b 1
-Z21 !s108 1510842342.099000
+Z21 !s108 1510842819.659000
 Z22 !s90 -reportprogress|300|../source/chrono_tb.vhd|
 Z23 !s107 ../source/chrono_tb.vhd|
 o-O0
@@ -110,7 +110,7 @@ R23
 o-O0
 R10
 Ecompteur
-Z27 w1510842330
+Z27 w1510842731
 Z28 DPx4 ieee 11 numeric_std 0 22 O3PF8EB`?j9=z7KT`fn941
 R1
 R2
@@ -122,7 +122,7 @@ L5
 Vg95IBXCam0j]6SWmJ<AkE1
 R6
 32
-Z31 !s108 1510842341.282000
+Z31 !s108 1510842818.848000
 Z32 !s90 -reportprogress|300|../source/compteur.vhd|
 Z33 !s107 ../source/compteur.vhd|
 o-O0
@@ -136,7 +136,7 @@ R2
 DEx4 work 8 compteur 0 22 g95IBXCam0j]6SWmJ<AkE1
 l19
 L13
-V1gXojN;j4hbJL38J5lgIj0
+V]4IiYaPn0>GCooa]ZcNV;3
 R6
 32
 R31
@@ -144,5 +144,5 @@ R32
 R33
 o-O0
 R10
-!s100 b@37_[72PaE`H8?eGVQjo2
+!s100 L8AA`Y<`7UA6?4^WSP8M22
 !i10b 1
