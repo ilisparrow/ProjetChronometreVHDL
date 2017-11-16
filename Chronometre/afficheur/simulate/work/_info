@@ -1,0 +1,97 @@
+m255
+K3
+13
+cModel Technology
+dD:\Desktop\Afficheur\simulate
+Eafficheur
+Z0 w1509115448
+Z1 DPx3 std 6 textio 0 22 5>J:;AW>W0[[dW0I6EN1Q0
+Z2 DPx4 ieee 14 std_logic_1164 0 22 5=aWaoGZSMWIcH0i^f`XF1
+Z3 dZ:\logique programmable\chronomètre\afficheur\simulate
+Z4 8../source/afficheur.vhd
+Z5 F../source/afficheur.vhd
+l0
+L4
+VkCo5AM<W;meWL7BiI5Y2M1
+Z6 OV;C;10.1d;51
+32
+Z7 !s108 1509115504.970000
+Z8 !s90 -reportprogress|300|../source/afficheur.vhd|
+Z9 !s107 ../source/afficheur.vhd|
+o-O0
+Z10 tExplicit 1
+!s100 1Ti=NJB1HZiD=QImJQn?^0
+!i10b 1
+Aarch
+R1
+R2
+Z11 DEx4 work 9 afficheur 0 22 kCo5AM<W;meWL7BiI5Y2M1
+l12
+L10
+VHiej<CfF_ANBAVa_42UOH1
+R6
+32
+R7
+R8
+R9
+o-O0
+R10
+!s100 eiFL:=ZGBTFdAg@GQ:2?>0
+!i10b 1
+Eafficheur_tb
+Z12 w1509115328
+Z13 DPx4 ieee 11 numeric_std 0 22 O3PF8EB`?j9=z7KT`fn941
+R1
+R2
+R3
+Z14 8../source/afficheur_tb.vhd
+Z15 F../source/afficheur_tb.vhd
+l0
+L5
+VUKM3R@<g_i5EB^];?[XUG1
+!s100 CDjl`Pf>:mgkUFHXM[:B]2
+R6
+32
+!i10b 1
+Z16 !s108 1509115505.126000
+Z17 !s90 -reportprogress|300|../source/afficheur_tb.vhd|
+Z18 !s107 ../source/afficheur_tb.vhd|
+o-O0
+R10
+Aarch
+R11
+R13
+R1
+R2
+Z19 DEx4 work 12 afficheur_tb 0 22 UKM3R@<g_i5EB^];?[XUG1
+l15
+L8
+Z20 VYPZMdOSAZj_KkQAXZ=8Gg2
+Z21 !s100 5ZB^TYBA0de=cH3:j3fBU2
+R6
+32
+!i10b 1
+R16
+R17
+R18
+o-O0
+R10
+Abench
+R11
+R13
+R1
+R2
+DEx4 work 12 afficheur_tb 0 22 Pf]ARn=zbg7Qg6Ugzflm61
+l14
+L8
+VePTki=b4ZQX<hfzUZV0nd1
+R6
+32
+R17
+o-O0
+R10
+w1509012976
+Z22 !s107 ../source/afficheur_tb.vhd|
+!s108 1509112359.588000
+!s100 U5hbHK^1gbdBBdlK0:[?S1
+!i10b 1

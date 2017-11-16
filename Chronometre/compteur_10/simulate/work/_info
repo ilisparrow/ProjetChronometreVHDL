@@ -1,0 +1,79 @@
+m255
+K3
+13
+cModel Technology
+dD:\Documents\2017 - 2018\Fac\S1 - Logique programmable\Exercices\compteur\simulate
+Ecompteur
+Z0 w1510300638
+Z1 DPx4 ieee 11 numeric_std 0 22 O3PF8EB`?j9=z7KT`fn941
+Z2 DPx3 std 6 textio 0 22 5>J:;AW>W0[[dW0I6EN1Q0
+Z3 DPx4 ieee 14 std_logic_1164 0 22 5=aWaoGZSMWIcH0i^f`XF1
+Z4 dZ:\logique programmable\chronomètre\compteur_10\simulate
+Z5 8../source/compteur.vhd
+Z6 F../source/compteur.vhd
+l0
+L5
+Vg95IBXCam0j]6SWmJ<AkE1
+Z7 OV;C;10.1d;51
+32
+Z8 !s108 1510300694.684000
+Z9 !s90 -reportprogress|300|../source/compteur.vhd|
+Z10 !s107 ../source/compteur.vhd|
+o-O0
+Z11 tExplicit 1
+!s100 Ohf_`ZVL6_hK5dNHzW?Za0
+!i10b 1
+Aarch
+R1
+R2
+R3
+Z12 DEx4 work 8 compteur 0 22 g95IBXCam0j]6SWmJ<AkE1
+l18
+L13
+V9RGnW]W4HGDn`j_l4C_CS2
+R7
+32
+R8
+R9
+R10
+o-O0
+R11
+!s100 :>4EF>C_FIziOF8Zjan[e1
+!i10b 1
+Ecompteur_tb
+Z13 w1510299479
+R2
+R3
+R4
+Z14 8../source/compteur_tb.vhd
+Z15 F../source/compteur_tb.vhd
+l0
+L4
+Vb8;=45^3PVFCnHPiBOOk10
+!s100 ]Ki`6:[Y0e<G^0l1mLdeB0
+R7
+32
+!i10b 1
+Z16 !s108 1510300694.825000
+Z17 !s90 -reportprogress|300|../source/compteur_tb.vhd|
+Z18 !s107 ../source/compteur_tb.vhd|
+o-O0
+R11
+Abench
+R1
+R12
+R2
+R3
+Z19 DEx4 work 11 compteur_tb 0 22 b8;=45^3PVFCnHPiBOOk10
+l12
+L7
+Z20 VT>TnKPM1mFzl[V0e`JXMD1
+Z21 !s100 aWIN]V9SUB6NagiO06G9>1
+R7
+32
+!i10b 1
+R16
+R17
+R18
+o-O0
+R11
