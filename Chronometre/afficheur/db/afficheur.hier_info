@@ -1,0 +1,46 @@
+|afficheur
+A[0] => Equal0.IN3
+A[0] => Equal1.IN2
+A[0] => Equal2.IN3
+A[0] => Equal3.IN3
+A[0] => Equal4.IN2
+A[0] => Equal5.IN3
+A[0] => Equal6.IN1
+A[0] => Equal7.IN3
+A[0] => Equal8.IN2
+A[1] => Equal0.IN2
+A[1] => Equal1.IN3
+A[1] => Equal2.IN2
+A[1] => Equal3.IN2
+A[1] => Equal4.IN1
+A[1] => Equal5.IN1
+A[1] => Equal6.IN3
+A[1] => Equal7.IN2
+A[1] => Equal8.IN1
+A[2] => Equal0.IN1
+A[2] => Equal1.IN1
+A[2] => Equal2.IN1
+A[2] => Equal3.IN1
+A[2] => Equal4.IN3
+A[2] => Equal5.IN2
+A[2] => Equal6.IN2
+A[2] => Equal7.IN1
+A[2] => Equal8.IN0
+A[3] => Equal0.IN0
+A[3] => Equal1.IN0
+A[3] => Equal2.IN0
+A[3] => Equal3.IN0
+A[3] => Equal4.IN0
+A[3] => Equal5.IN0
+A[3] => Equal6.IN0
+A[3] => Equal7.IN0
+A[3] => Equal8.IN3
+B0 <= B0.DB_MAX_OUTPUT_PORT_TYPE
+B1 <= B1.DB_MAX_OUTPUT_PORT_TYPE
+B2 <= B2.DB_MAX_OUTPUT_PORT_TYPE
+B3 <= Equal1.DB_MAX_OUTPUT_PORT_TYPE
+B4 <= B4.DB_MAX_OUTPUT_PORT_TYPE
+B5 <= B5.DB_MAX_OUTPUT_PORT_TYPE
+B6 <= B6.DB_MAX_OUTPUT_PORT_TYPE
+
+
