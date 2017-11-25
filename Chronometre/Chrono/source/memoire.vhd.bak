@@ -32,8 +32,7 @@ SIGNAL c6,d6, s6, ds6: std_logic_vector(3 downto 0);
 SIGNAL c7,d7, s7, ds7: std_logic_vector(3 downto 0);
 
 
-SIGNAL indiceMemoire : std_logic_vector(2 downto 0) := "000";
-SIGNAL indiceAffichage : std_logic_vector(2 downto 0) := "000";
+SIGNAL indiceMemoire std_logic_vector(3 downto 0) := "000";
 
 
 -----------
@@ -94,12 +93,12 @@ begin
 				 d7<=sauvDixieme;
 				 s7<=sauvSEC;
 				ds7<=sauvDIXSEC;
+			
 			end if;
 			
-			--Incrémentation indiceMémoire
-			indiceMemoire <= std_logic_vector (unsigned(indiceMemoire)+ 1);
-		else 
-		indiceMemoire <=indiceMemoire;
+		--Incrémentation indiceMémoire
+		indiceMemoire <= std_logic_vector (unsigned(indiceMemoire)+ 1);
+		
 		end if;
 		------------------------------------------------------------------------------------------
 		------------------------------------------------------------------------------------------
@@ -112,55 +111,50 @@ begin
 		if (rising_edge(boutonAffichage) AND stopMemoire='1')	then 
 		
 			
-			if(indiceAffichage="000")	then 
+			if(indiceMemoire="000")	then 
 				 sortieCentieme	 <=c0;
 				 sortieDixieme	 <=d0;
 				 sortieSEC		 <=s0;
 				 sortieDIXSEC	<=ds0;
-			elsif(indiceAffichage="001") then
+			elsif(indiceMemoire="001") then
 				 sortieCentieme	 <=c1;
 				 sortieDixieme	 <=d1;
 				 sortieSEC		 <=s1;
 				 sortieDIXSEC	<=ds1;
-			elsif(indiceAffichage="010") then
+			elsif(indiceMemoire="010") then
 				sortieCentieme	 <=c2;
 				 sortieDixieme	 <=d2;
 				 sortieSEC		 <=s2;
 				 sortieDIXSEC	<=ds2;
-			elsif(indiceAffichage="011") then
+			elsif(indiceMemoire="011") then
 				 sortieCentieme	 <=c3;
 				 sortieDixieme	 <=d3;
 				 sortieSEC		 <=s3;
 				 sortieDIXSEC	<=ds3;
-			elsif(indiceAffichage="100") then
+			elsif(indiceMemoire="100") then
 				 sortieCentieme	 <=c4;
 				 sortieDixieme	 <=d4;
 				 sortieSEC		 <=s4;
 				 sortieDIXSEC	<=ds4;
-			elsif(indiceAffichage="101") then
+			elsif(indiceMemoire="101") then
 				 sortieCentieme	 <=c5;
 				 sortieDixieme	 <=d5;
 				 sortieSEC		 <=s5;
 				 sortieDIXSEC	<=ds5;
-			elsif(indiceAffichage="110") then
+			elsif(indiceMemoire="110") then
 				 sortieCentieme	 <=c6;
 				 sortieDixieme	 <=d6;
 				 sortieSEC		 <=s6;
 				 sortieDIXSEC	<=ds6;
-			elsif(indiceAffichage="111") then
+			elsif(indiceMemoire="111") then
 				 sortieCentieme	 <=c7;
 				 sortieDixieme	 <=d7;
 				 sortieSEC		 <=s7;
 				 sortieDIXSEC	<=ds7;
 			end if;
 			
-		--Incrémentation indiceAffichage
-		
-		indiceAffichage  <= std_logic_vector (unsigned(indiceAffichage )+ 1);
-		
-		else 
-		
-		indiceAffichage  <= indiceAffichage;
+		--Incrémentation indiceMémoire
+		indiceMemoire <= std_logic_vector (unsigned(indiceMemoire)+ 1);
 		
 		end if;
 		

@@ -1,13 +1,13 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
---Faire une description structurale du chronomï¿½tre
+--Faire une description structurale du chronomètre
 
 entity chrono is 
 port(
 
 --Declaration des E/S
---Variables de dï¿½buggage
+--Variables de débuggage
 
 --test,testDeux,testTrois,testQuatre : out std_logic_vector (3 downto 0) := "0000";			testTick : out std_logic;
 
@@ -19,10 +19,10 @@ aff_CENTIEMES, aff_DIXIEMES, aff_SEC, aff_DIX_SEC : out std_logic_vector (6 down
 
 --Variables compteurs
 --CHRONO_LOADN : gestion chargement valeur
---CHRONO_CET : gestion dï¿½part/arret
+--CHRONO_CET : gestion départ/arret
 --CHRONO_H : Horloge
 
-BoutondeSauvegarde, BoutonAffichageMemoire, CHRONO_H, CHRONO_LOADN, CHRONO_RAZN, STOP: in std_logic
+BoutondeSauvegarde, BoutonAffichageMemoire, CHRONO_H, CHRONO_LOADN, CHRONO_RAZN, STOP, CHRONO_Switch_Mode: in std_logic
 
 );
 
@@ -32,7 +32,7 @@ end chrono;
 architecture arch of chrono is
 
 ----------------------------------------------------------------------------------
---							Dï¿½claration des signaux								--
+--							Déclaration des signaux								--
 ----------------------------------------------------------------------------------
 
 --Variables qui gereront les incrementations temporels
@@ -40,10 +40,10 @@ Signal CENTIEMES,DIXIEMES,SEC,DIX_SEC : std_logic_vector (3 downto 0) ;
 Signal Aff_Memoire_CENTIEMES, Aff_Memoire_DIXIEMES, Aff_Memoire_SEC, Aff_Memoire_DIX_SEC : std_logic_vector (3 downto 0) ;
 Signal Aff_compteur_CENTIEMES, Aff_compteur_DIXIEMES, Aff_compteur_SEC, Aff_compteur_DIX_SEC : std_logic_vector (3 downto 0) ;
 
---Variables mï¿½moire
+--Variables mémoire
 Signal ADATA : std_logic_vector(3  downto 0);
 
---Variables intï¿½rmediaire de retenue
+--Variables intérmediaire de retenue
 SIGNAL RETENUE_CENTIEMES_TMP : std_logic:='0';
 SIGNAL RETENUE_DIXIEMES_TMP : std_logic:='0';
 SIGNAL RETENUE_SEC_TMP : std_logic:='0';
@@ -53,11 +53,11 @@ SIGNAL CHRONO_CET : std_logic;
 SIGNAL  TICK1US,         TICK10US ,       TICK1MS,         TICK1S : std_logic; 
 
 ----------------------------------------------------------------------------------
---							FIN de Dï¿½claration des signaux						--
+--							FIN de Déclaration des signaux						--
 ----------------------------------------------------------------------------------
 
 ----------------------------------------------------------------------------------
---			Dï¿½claration des composants, afficheur et compteur					--
+--			Déclaration des composants, afficheur et compteur					--
 ----------------------------------------------------------------------------------
 
 component afficheur port (	
@@ -87,12 +87,13 @@ component memoire port (
   
   boutonSauvegarde, boutonAffichage, RAZN_Memoire,stopMemoire : in std_logic;
   sauvCentieme, sauvDixieme, sauvSEC, sauvDIXSEC : in std_logic_vector (3 downto 0);
-  sortieCentieme, sortieDixieme, sortieSEC, sortieDIXSEC : out std_logic_vector(3 downto 0));
+  sortieCentieme, sortieDixieme, sortieSEC, sortieDIXSEC : out std_logic_vector(3 downto 0)
+  stop_et_affichage : out std_logic);
   
 end component;
 
 ----------------------------------------------------------------------------------
---			Fin dï¿½claration des composants, afficheur et compteur				--
+--			Fin déclaration des composants, afficheur et compteur				--
 ----------------------------------------------------------------------------------
   
 begin
@@ -110,7 +111,7 @@ begin
 			compteurSEC_DIX  :  compteur port map (H=>CHRONO_H, RAZN=>CHRONO_RAZN, LOADN=>CHRONO_LOADN, CET=>RETENUE_SEC_TMP, DATA=>ADATA, RETENUE=>RETENUE_DIX_SEC_TMP, S=>Aff_compteur_DIX_SEC);
 			
 			
-			memoireInstance  :  memoire  port map (  boutonSauvegarde => BoutondeSauvegarde, boutonAffichage => BoutonAffichageMemoire, RAZN_Memoire => CHRONO_RAZN,stopMemoire=>STOP,
+			memoireInstance : memoire port map (  boutonSauvegarde => BoutondeSauvegarde, boutonAffichage => BoutonAffichageMemoire, RAZN_Memoire => CHRONO_RAZN,stopMemoire=>STOP,
 												  sauvCentieme => Aff_compteur_CENTIEMES, sauvDixieme => Aff_compteur_DIXIEMES, sauvSEC => Aff_compteur_SEC, sauvDIXSEC => Aff_compteur_DIX_SEC,
 												  sortieCentieme => Aff_Memoire_CENTIEMES, sortieDixieme => Aff_Memoire_DIXIEMES, sortieSEC => Aff_Memoire_SEC, sortieDIXSEC => Aff_Memoire_DIX_SEC);
 												  
@@ -120,16 +121,12 @@ begin
 			process (STOP,BoutonAffichageMemoire)
 			begin 
 		 
-			 if (STOP='1')  then 
-			 
-			  if rising_edge(BoutonAffichageMemoire) then
+			 if (STOP='1') AND (rising_edge(BoutonAffichageMemoire) then
 			 
 				CENTIEMES <= Aff_Memoire_CENTIEMES;
 				DIXIEMES <= Aff_Memoire_DIXIEMES;
 				SEC <= Aff_Memoire_SEC;
 				DIX_SEC <= Aff_Memoire_DIX_SEC;
-				
-				end if;
 			 
 			 else 
 
@@ -138,7 +135,6 @@ begin
 				SEC <= Aff_compteur_SEC;
 				DIX_SEC <= Aff_compteur_DIX_SEC;
 			 
-			end if;
 				
 			end process;
 			
