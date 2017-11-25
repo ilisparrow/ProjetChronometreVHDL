@@ -1,27 +1,31 @@
-
 library IEEE;
      use IEEE.std_logic_1164.all;
      use IEEE.numeric_std.all;
 
----------------------------------
+-----------------
 entity memoire is
----------------------------------
+-----------------
   port ( 
   
-  boutonSauvegarde, boutonAffichage, RAZN_Memoire,stopMemoire : in std_logic;
+  boutonSauvegarde, boutonAffichage, RAZN_Memoire, stopMemoire : in std_logic;
   
-  --recuperation des valeurs du compteur
+  -- recuperation des valeurs du compteur
   sauvCentieme, sauvDixieme, sauvSEC, sauvDIXSEC : in std_logic_vector (3 downto 0);
   
   -- valeurs affichés en sortie
   sortieCentieme, sortieDixieme, sortieSEC, sortieDIXSEC : out std_logic_vector(3 downto 0)
   
-      );
+  );
+-------------------
 end entity memoire;
+-------------------
 
---------------------------------------
+-------------------------------
 architecture arch of memoire is
---------------------------------------
+-------------------------------
+
+-- Variables de sauvegardes (Centiemes, Dixiemes, Secondes, Dixaines de secondes pour chaques sauvegardes)
+
 SIGNAL c0,d0, s0, ds0: std_logic_vector(3 downto 0);
 SIGNAL c1,d1, s1, ds1: std_logic_vector(3 downto 0);
 SIGNAL c2,d2, s2, ds2: std_logic_vector(3 downto 0);
@@ -31,28 +35,33 @@ SIGNAL c5,d5, s5, ds5: std_logic_vector(3 downto 0);
 SIGNAL c6,d6, s6, ds6: std_logic_vector(3 downto 0);
 SIGNAL c7,d7, s7, ds7: std_logic_vector(3 downto 0);
 
+-- Indices permettant de se reperer dans les sauvegardes et l'affichage des memoires
 
 SIGNAL indiceMemoire : std_logic_vector(2 downto 0) := "000";
 SIGNAL indiceAffichage : std_logic_vector(2 downto 0) := "000";
 
-
------------
 begin
------------
+
 	process (boutonSauvegarde, boutonAffichage, RAZN_Memoire)
-		begin
+	
+	begin
 		
-		-- Remise à 0, on réinitialise l'indiceMemoire
+		-- Remise à 0, on réinitialise l'indiceMemoire et l'indiceAffichage
 		if RAZN_Memoire = '0' then 
 			
-			indiceMemoire <= "000";
+			indiceMemoire 	<= "000";
+			indiceAffichage <= "000";
 		
 		end if;
 		
+		------------------------------------------------------------------------------------------
+		--    							BOUTON SAUVEGARDE  										--
+		------------------------------------------------------------------------------------------	
+		
 		if rising_edge(boutonSauvegarde) then
 			
-			--Si on est sur un front montant du bouton et que le chronomètre est actif
-			--Sauvegarde des valeurs en fonction du nombre d'appuis sur le boutonSauvegarde
+			-- Si on est sur un front montant du bouton et que le chronomètre est actif
+			-- Sauvegarde des valeurs en fonction du nombre d'appuis sur le boutonSauvegarde
 			
 			if(indiceMemoire="000") then 
 				 c0<=sauvCentieme;
@@ -98,17 +107,22 @@ begin
 			
 			--Incrémentation indiceMémoire
 			indiceMemoire <= std_logic_vector (unsigned(indiceMemoire)+ 1);
+			
 		else 
-		indiceMemoire <=indiceMemoire;
+		
+		indiceMemoire <= indiceMemoire;
+		
 		end if;
-		------------------------------------------------------------------------------------------
-		------------------------------------------------------------------------------------------
-		--    						FIN DU IF BOUTON SAUVEGARDE  								--
-		------------------------------------------------------------------------------------------
-		------------------------------------------------------------------------------------------
 		
+		------------------------------------------------------------------------------------------
+		--    						FIN BOUTON SAUVEGARDE  										--
+		------------------------------------------------------------------------------------------		
 		
-		-- si on appui sur le bouton d'affichage
+		------------------------------------------------------------------------------------------
+		--    							BOUTON AFFICHAGE  										--
+		------------------------------------------------------------------------------------------	
+		
+		-- si on appui sur le bouton d'affichage quand le chronomètre est arrété.
 		if (rising_edge(boutonAffichage) AND stopMemoire='1')	then 
 		
 			
@@ -165,11 +179,9 @@ begin
 		end if;
 		
 		------------------------------------------------------------------------------------------
+		--    							FIN BOUTON AFFICHAGE	  								--
 		------------------------------------------------------------------------------------------
-		--    						FIN DU IF BOUTON AFFICHAGE  								--
-		------------------------------------------------------------------------------------------
-		------------------------------------------------------------------------------------------
-		
+
 	end process;
 
 ---------------------------

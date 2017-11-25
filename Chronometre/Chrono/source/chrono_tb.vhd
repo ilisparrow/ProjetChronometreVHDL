@@ -1,32 +1,37 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
+-------------------
 entity chrono_tb is 
+-------------------
+-------------------
 end chrono_tb;
+-------------------
 
+----------------------------------
 architecture bench of chrono_tb is
+----------------------------------
 
 --Variables qui gereront les incrementations temporels
 --Signal CENT,Dix,SEC,SecDix : std_logic_vector (3 downto 0) ;
 
---Variables mémoire
+-- Variables de test des temps.
 Signal TEST,TESTDeux,testTrois,testQuatre,ADATA : std_logic_vector(3  downto 0);
 
---Variable gestion affichaque
+-- Variables de gestion affichage.
 signal aff_CENTIEMES, aff_DIXIEMES, aff_SEC, aff_DIX_SEC : std_logic_vector (6 downto 0);
 
---LOADN : gestion chargemenet valeur; CET : gestion départ/arret, H : Horloge
+-- Variables que l'on souhaite modifier pour la simulation.
 signal CHRONO_RAZN,CHRONO_LOADN,CHRONO_H,testTick : std_logic;
 
---Arret boucle infinie
+-- Arret de la boucle infinie controlant l'horloge.
 signal stopclock : boolean;
 
 begin
 
+	-- Mapping/Liaison des valeurs entre testbench et description principale.
 	M: entity work.chrono(arch) port map (
 
-		
-		
 		aff_CENTIEMES => aff_CENTIEMES,
 		aff_DIXIEMES => aff_DIXIEMES,
 		aff_SEC => aff_SEC,
@@ -42,6 +47,7 @@ begin
 
 	);
 
+	-- Gestion de l'horloge.
 	process
 		begin
 		
@@ -53,7 +59,8 @@ begin
 			end loop;
 		wait;
 	end process;
-
+	
+	-- Process principal du testbench (initialisation des valeurs, timing ...)
 	process
 		begin
 
@@ -67,5 +74,6 @@ begin
 		wait;
 	end process;
 
-
+----------
 end bench;
+----------
