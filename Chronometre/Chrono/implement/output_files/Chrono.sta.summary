@@ -2,28 +2,20 @@
 TimeQuest Timing Analyzer Summary
 ------------------------------------------------------------
 
-Type  : Slow Model Setup 'BoutonAffichageMemoire'
-Slack : -2.222
-TNS   : -39.355
-
-Type  : Slow Model Setup 'BoutondeSauvegarde'
-Slack : -1.844
-TNS   : -186.583
+Type  : Slow Model Setup 'STOP'
+Slack : -4.143
+TNS   : -74.351
 
 Type  : Slow Model Setup 'CHRONO_H'
-Slack : -1.387
-TNS   : -37.698
+Slack : -2.402
+TNS   : -47.740
 
-Type  : Slow Model Setup 'STOP'
-Slack : -1.118
-TNS   : -10.807
-
-Type  : Slow Model Hold 'BoutonAffichageMemoire'
-Slack : 0.157
-TNS   : 0.000
+Type  : Slow Model Setup 'BoutondeSauvegarde'
+Slack : -1.672
+TNS   : -194.555
 
 Type  : Slow Model Hold 'BoutondeSauvegarde'
-Slack : 0.391
+Slack : 0.235
 TNS   : 0.000
 
 Type  : Slow Model Hold 'CHRONO_H'
@@ -31,24 +23,24 @@ Slack : 0.391
 TNS   : 0.000
 
 Type  : Slow Model Hold 'STOP'
-Slack : 0.600
+Slack : 0.518
 TNS   : 0.000
 
-Type  : Slow Model Recovery 'BoutonAffichageMemoire'
-Slack : -0.057
-TNS   : -0.554
+Type  : Slow Model Recovery 'BoutondeSauvegarde'
+Slack : -0.122
+TNS   : -1.484
 
 Type  : Slow Model Recovery 'CHRONO_H'
-Slack : -0.029
-TNS   : -0.029
+Slack : -0.009
+TNS   : -0.009
 
 Type  : Slow Model Removal 'CHRONO_H'
-Slack : -0.043
-TNS   : -1.032
+Slack : -0.044
+TNS   : -1.043
 
-Type  : Slow Model Removal 'BoutonAffichageMemoire'
-Slack : -0.038
-TNS   : -0.114
+Type  : Slow Model Removal 'BoutondeSauvegarde'
+Slack : 0.347
+TNS   : 0.000
 
 Type  : Slow Model Minimum Pulse Width 'CHRONO_H'
 Slack : -1.380
@@ -60,34 +52,22 @@ TNS   : -1.380
 
 Type  : Slow Model Minimum Pulse Width 'BoutondeSauvegarde'
 Slack : -1.222
-TNS   : -132.222
-
-Type  : Slow Model Minimum Pulse Width 'BoutonAffichageMemoire'
-Slack : -1.222
-TNS   : -36.222
-
-Type  : Fast Model Setup 'BoutonAffichageMemoire'
-Slack : -0.467
-TNS   : -5.481
-
-Type  : Fast Model Setup 'BoutondeSauvegarde'
-Slack : -0.404
-TNS   : -28.019
-
-Type  : Fast Model Setup 'CHRONO_H'
-Slack : -0.092
-TNS   : -0.406
+TNS   : -151.222
 
 Type  : Fast Model Setup 'STOP'
-Slack : -0.039
-TNS   : -0.039
+Slack : -1.608
+TNS   : -23.736
 
-Type  : Fast Model Hold 'BoutonAffichageMemoire'
-Slack : -0.238
-TNS   : -2.978
+Type  : Fast Model Setup 'CHRONO_H'
+Slack : -0.548
+TNS   : -3.621
+
+Type  : Fast Model Setup 'BoutondeSauvegarde'
+Slack : -0.315
+TNS   : -28.570
 
 Type  : Fast Model Hold 'BoutondeSauvegarde'
-Slack : 0.215
+Slack : 0.027
 TNS   : 0.000
 
 Type  : Fast Model Hold 'CHRONO_H'
@@ -95,24 +75,24 @@ Slack : 0.215
 TNS   : 0.000
 
 Type  : Fast Model Hold 'STOP'
-Slack : 0.384
+Slack : 0.351
 TNS   : 0.000
 
-Type  : Fast Model Recovery 'BoutonAffichageMemoire'
-Slack : 0.215
+Type  : Fast Model Recovery 'BoutondeSauvegarde'
+Slack : 0.162
 TNS   : 0.000
 
 Type  : Fast Model Recovery 'CHRONO_H'
-Slack : 0.247
+Slack : 0.251
 TNS   : 0.000
 
 Type  : Fast Model Removal 'CHRONO_H'
-Slack : -0.026
-TNS   : -0.601
+Slack : -0.025
+TNS   : -0.596
 
-Type  : Fast Model Removal 'BoutonAffichageMemoire'
-Slack : -0.005
-TNS   : -0.015
+Type  : Fast Model Removal 'BoutondeSauvegarde'
+Slack : 0.196
+TNS   : 0.000
 
 Type  : Fast Model Minimum Pulse Width 'CHRONO_H'
 Slack : -1.380
@@ -124,10 +104,6 @@ TNS   : -1.380
 
 Type  : Fast Model Minimum Pulse Width 'BoutondeSauvegarde'
 Slack : -1.222
-TNS   : -132.222
-
-Type  : Fast Model Minimum Pulse Width 'BoutonAffichageMemoire'
-Slack : -1.222
-TNS   : -36.222
+TNS   : -151.222
 
 ------------------------------------------------------------

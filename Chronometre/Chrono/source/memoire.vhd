@@ -7,7 +7,7 @@ entity memoire is
 -----------------
   port ( 
   
-  boutonSauvegarde, boutonAffichage, RAZN_Memoire, stopMemoire : in std_logic;
+  boutonSauvegarde, RAZN_Memoire, stopMemoire : in std_logic;
   
   -- recuperation des valeurs du compteur
   sauvCentieme, sauvDixieme, sauvSEC, sauvDIXSEC : in std_logic_vector (3 downto 0);
@@ -42,7 +42,7 @@ SIGNAL indiceAffichage : std_logic_vector(2 downto 0) := "000";
 
 begin
 
-	process (boutonSauvegarde, boutonAffichage, RAZN_Memoire)
+	process (boutonSauvegarde, RAZN_Memoire, stopMemoire)
 	
 	begin
 		
@@ -54,78 +54,14 @@ begin
 		
 		end if;
 		
+		if (stopMemoire='1') then 
+			
 		------------------------------------------------------------------------------------------
-		--    							BOUTON SAUVEGARDE  										--
+		--    									AFFICHAGE  										--
 		------------------------------------------------------------------------------------------	
-		
-		if rising_edge(boutonSauvegarde) then
-			
-			-- Si on est sur un front montant du bouton et que le chronomètre est actif
-			-- Sauvegarde des valeurs en fonction du nombre d'appuis sur le boutonSauvegarde
-			
-			if(indiceMemoire="000") then 
-				 c0<=sauvCentieme;
-				 d0<=sauvDixieme;
-				 s0<=sauvSEC;
-				ds0<=sauvDIXSEC;
-			elsif(indiceMemoire="001") then
-				 c1<=sauvCentieme;
-				 d1<=sauvDixieme;
-				 s1<=sauvSEC;
-				ds1<=sauvDIXSEC;
-			elsif(indiceMemoire="010") then
-				 c2<=sauvCentieme;
-				 d2<=sauvDixieme;
-				 s2<=sauvSEC;
-				ds2<=sauvDIXSEC;
-			elsif(indiceMemoire="011") then
-				 c3<=sauvCentieme;
-				 d3<=sauvDixieme;
-				 s3<=sauvSEC;
-				ds3<=sauvDIXSEC;
-			elsif(indiceMemoire="100") then
-				 c4<=sauvCentieme;
-				 d4<=sauvDixieme;
-				 s4<=sauvSEC;
-				ds4<=sauvDIXSEC;
-			elsif(indiceMemoire="101") then
-				 c5<=sauvCentieme;
-				 d5<=sauvDixieme;
-				 s5<=sauvSEC;
-				ds5<=sauvDIXSEC;
-			elsif(indiceMemoire="110") then
-				 c6<=sauvCentieme;
-				 d6<=sauvDixieme;
-				 s6<=sauvSEC;
-				ds6<=sauvDIXSEC;
-			elsif(indiceMemoire="111") then
-				 c7<=sauvCentieme;
-				 d7<=sauvDixieme;
-				 s7<=sauvSEC;
-				ds7<=sauvDIXSEC;
-			end if;
-			
-			--Incrémentation indiceMémoire
-			indiceMemoire <= std_logic_vector (unsigned(indiceMemoire)+ 1);
-			
-		else 
-		
-		indiceMemoire <= indiceMemoire;
-		
-		end if;
-		
-		------------------------------------------------------------------------------------------
-		--    						FIN BOUTON SAUVEGARDE  										--
-		------------------------------------------------------------------------------------------		
-		
-		------------------------------------------------------------------------------------------
-		--    							BOUTON AFFICHAGE  										--
-		------------------------------------------------------------------------------------------	
-		
+				
 		-- si on appui sur le bouton d'affichage quand le chronomètre est arrété.
-		if (rising_edge(boutonAffichage) AND stopMemoire='1')	then 
 		
-			
 			if(indiceAffichage="000")	then 
 				 sortieCentieme	 <=c0;
 				 sortieDixieme	 <=d0;
@@ -168,20 +104,87 @@ begin
 				 sortieDIXSEC	<=ds7;
 			end if;
 			
-		--Incrémentation indiceAffichage
+		------------------------------------------------------------------------------------------
+		--    									FIN AFFICHAGE	  								--
+		------------------------------------------------------------------------------------------
+			
+		end if;
+	 
+		if rising_edge(boutonSauvegarde) then
 		
-		indiceAffichage  <= std_logic_vector (unsigned(indiceAffichage )+ 1);
+			if (stopMemoire = '0') then 
+			
+				------------------------------------------------------------------------------------------
+				--    								SAUVEGARDE  										--
+				------------------------------------------------------------------------------------------
+				
+				-- Si on est sur un front montant du bouton et que le chronomètre est actif
+				-- Sauvegarde des valeurs en fonction du nombre d'appuis sur le boutonSauvegarde
+				
+				if(indiceMemoire="000") then 
+					 c0<=sauvCentieme;
+					 d0<=sauvDixieme;
+					 s0<=sauvSEC;
+					ds0<=sauvDIXSEC;
+				elsif(indiceMemoire="001") then
+					 c1<=sauvCentieme;
+					 d1<=sauvDixieme;
+					 s1<=sauvSEC;
+					ds1<=sauvDIXSEC;
+				elsif(indiceMemoire="010") then
+					 c2<=sauvCentieme;
+					 d2<=sauvDixieme;
+					 s2<=sauvSEC;
+					ds2<=sauvDIXSEC;
+				elsif(indiceMemoire="011") then
+					 c3<=sauvCentieme;
+					 d3<=sauvDixieme;
+					 s3<=sauvSEC;
+					ds3<=sauvDIXSEC;
+				elsif(indiceMemoire="100") then
+					 c4<=sauvCentieme;
+					 d4<=sauvDixieme;
+					 s4<=sauvSEC;
+					ds4<=sauvDIXSEC;
+				elsif(indiceMemoire="101") then
+					 c5<=sauvCentieme;
+					 d5<=sauvDixieme;
+					 s5<=sauvSEC;
+					ds5<=sauvDIXSEC;
+				elsif(indiceMemoire="110") then
+					 c6<=sauvCentieme;
+					 d6<=sauvDixieme;
+					 s6<=sauvSEC;
+					ds6<=sauvDIXSEC;
+				elsif(indiceMemoire="111") then
+					 c7<=sauvCentieme;
+					 d7<=sauvDixieme;
+					 s7<=sauvSEC;
+					ds7<=sauvDIXSEC;
+				end if;
+				
+				--Incrémentation indiceMémoire
+				indiceMemoire <= std_logic_vector (unsigned(indiceMemoire)+ 1);
+				
+				------------------------------------------------------------------------------------------
+				--    								FIN SAUVEGARDE  									--
+				------------------------------------------------------------------------------------------	
+				
+			else 
+			
+				--Incrémentation indiceAffichage
+		
+				indiceAffichage  <= std_logic_vector (unsigned(indiceAffichage)+ 1);
+		
+			end if;	
 		
 		else 
 		
+		indiceMemoire  	<= indiceMemoire;
 		indiceAffichage  <= indiceAffichage;
 		
 		end if;
 		
-		------------------------------------------------------------------------------------------
-		--    							FIN BOUTON AFFICHAGE	  								--
-		------------------------------------------------------------------------------------------
-
 	end process;
 
 ---------------------------

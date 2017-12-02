@@ -20,15 +20,13 @@ aff_CENTIEMES, aff_DIXIEMES, aff_SEC, aff_DIX_SEC : out std_logic_vector (6 down
 
 -- Variables compteurs :
 
--- BoutondeSauvegarde : Bouton permettant de sauvegarder les temps.
--- BoutonAffichageMemoire : Bouton permettant de passer d'une valeur sauvegardé à l'autre.
 -- CHRONO_H : Horloge.
 -- CHRONO_LOADN : gestion chargement valeur.
 -- CHRONO_CET : gestion depart/arret.
 -- CHRONO_RAZN : gestion de la réinitialisation du chronomètre.
 -- STOP : Permet d'arreter et de relancer le chrono.
 
-BoutondeSauvegarde, BoutonAffichageMemoire, CHRONO_H, CHRONO_LOADN, CHRONO_RAZN, STOP: in std_logic
+BoutondeSauvegarde, Switch_Decompte, CHRONO_H, CHRONO_LOADN, CHRONO_RAZN, STOP: in std_logic
 
 );
 
@@ -86,7 +84,7 @@ component fdiv   port (
 end component;
 	  
 component compteur	port (	
-		H, LOADN, CET, RAZN: in std_logic;	
+		H, LOADN, CET, RAZN, DECOMPTE: in std_logic;	
 		DATA : in std_logic_vector(3  downto 0);	
 		S: out std_logic_vector (3 downto 0);
 		RETENUE : out std_logic); 
@@ -94,7 +92,7 @@ end component;
 
 component memoire port ( 
   
-  boutonSauvegarde, boutonAffichage, RAZN_Memoire, stopMemoire : in std_logic;
+  boutonSauvegarde, RAZN_Memoire, stopMemoire : in std_logic;
   sauvCentieme, sauvDixieme, sauvSEC, sauvDIXSEC : in std_logic_vector (3 downto 0);
   sortieCentieme, sortieDixieme, sortieSEC, sortieDIXSEC : out std_logic_vector(3 downto 0));
   
@@ -111,29 +109,34 @@ begin
 	
 
 	-- Declaration des compteurs.
-	compteurCENTIEMES : compteur port map (H=>CHRONO_H, RAZN=>CHRONO_RAZN, LOADN=>CHRONO_LOADN, CET=>CHRONO_CET, DATA=>ADATA, RETENUE=>RETENUE_CENTIEMES_TMP, S=>Aff_compteur_CENTIEMES);
+	compteurCENTIEMES : compteur port map (H=>CHRONO_H, RAZN=>CHRONO_RAZN, LOADN=>CHRONO_LOADN, CET=>CHRONO_CET, 
+										   DECOMPTE => Switch_Decompte, DATA=>ADATA, RETENUE=>RETENUE_CENTIEMES_TMP, S=>Aff_compteur_CENTIEMES);
 	
-	compteurDIXIEMES :  compteur port map (H=>CHRONO_H, RAZN=>CHRONO_RAZN, LOADN=>CHRONO_LOADN, CET=>RETENUE_CENTIEMES_TMP, DATA=>ADATA, RETENUE=>RETENUE_DIXIEMES_TMP, S=>Aff_compteur_DIXIEMES);
+	compteurDIXIEMES :  compteur port map (H=>CHRONO_H, RAZN=>CHRONO_RAZN, LOADN=>CHRONO_LOADN, CET=>RETENUE_CENTIEMES_TMP, 
+										   DECOMPTE => Switch_Decompte, DATA=>ADATA, RETENUE=>RETENUE_DIXIEMES_TMP, S=>Aff_compteur_DIXIEMES);
 	
-	compteurSEC      :  compteur port map (H=>CHRONO_H, RAZN=>CHRONO_RAZN, LOADN=>CHRONO_LOADN, CET=>RETENUE_DIXIEMES_TMP, DATA=>ADATA, RETENUE=>RETENUE_SEC_TMP, S=>Aff_compteur_SEC);
+	compteurSEC      :  compteur port map (H=>CHRONO_H, RAZN=>CHRONO_RAZN, LOADN=>CHRONO_LOADN, CET=>RETENUE_DIXIEMES_TMP, 
+										   DECOMPTE => Switch_Decompte, DATA=>ADATA, RETENUE=>RETENUE_SEC_TMP, S=>Aff_compteur_SEC);
 	
-	compteurSEC_DIX  :  compteur port map (H=>CHRONO_H, RAZN=>CHRONO_RAZN, LOADN=>CHRONO_LOADN, CET=>RETENUE_SEC_TMP, DATA=>ADATA, RETENUE=>RETENUE_DIX_SEC_TMP, S=>Aff_compteur_DIX_SEC);
+	compteurSEC_DIX  :  compteur port map (H=>CHRONO_H, RAZN=>CHRONO_RAZN, LOADN=>CHRONO_LOADN, CET=>RETENUE_SEC_TMP, 
+										   DECOMPTE => Switch_Decompte, DATA=>ADATA, RETENUE=>RETENUE_DIX_SEC_TMP, S=>Aff_compteur_DIX_SEC);
 	
 	-- Declaration du composant de mémoire.
-	memoireInstance  :  memoire  port map (  boutonSauvegarde => BoutondeSauvegarde, boutonAffichage => BoutonAffichageMemoire, RAZN_Memoire => CHRONO_RAZN,stopMemoire=>STOP,
+	memoireInstance  :  memoire  port map (boutonSauvegarde => BoutondeSauvegarde, RAZN_Memoire => CHRONO_RAZN, stopMemoire=>STOP,
 										  sauvCentieme => Aff_compteur_CENTIEMES, sauvDixieme => Aff_compteur_DIXIEMES, sauvSEC => Aff_compteur_SEC, sauvDIXSEC => Aff_compteur_DIX_SEC,
 										  sortieCentieme => Aff_Memoire_CENTIEMES, sortieDixieme => Aff_Memoire_DIXIEMES, sortieSEC => Aff_Memoire_SEC, sortieDIXSEC => Aff_Memoire_DIX_SEC);
 	
 	-- Process de gestion d'affichage entre compteur ou valeurs sauvegardés.
-	process (STOP,BoutonAffichageMemoire)
+	process (STOP,BoutondeSauvegarde)
 		
 	begin 
 		
 		-- Si le compteur est a l'arret : 
 		if (STOP='1')  then 
 			
+			
 			-- Alors si on appuis sur le bouton on affiche les valeurs sauvegardes par le composant memoire.
-			if rising_edge(BoutonAffichageMemoire) then
+			if rising_edge(BoutondeSauvegarde) then
 	 
 				CENTIEMES 	<= Aff_Memoire_CENTIEMES;
 				DIXIEMES 	<= Aff_Memoire_DIXIEMES;
